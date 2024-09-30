@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form method="POST">
+            <input type="text" name="username" placeholder="Usuário" required>
+            <input type="password" name="password" placeholder="Senha" required>
+            <button class="bubbly-button login-button" type="submit">Login</button>
+        </form>
+        <p>Não tem uma conta? <a href="{{ url_for('register') }}">Registre-se aqui</a></p>
+    </div>
+
+    <script>
+        var animateButton = function(e) {
+            // Verificar se o botão não é o botão de login (para evitar bloquear o submit)
+            if (!e.target.classList.contains('login-button')) {
+                e.preventDefault();
+            }
+
+            // Reiniciar a animação
+            e.target.classList.remove('animate');
+            e.target.classList.add('animate');
+            
+            // Remover a animação após 700ms
+            setTimeout(function(){
+                e.target.classList.remove('animate');
+            }, 700);
+        };
+
+        // Aplicar a animação nos botões com a classe bubbly-button
+        var bubblyButtons = document.getElementsByClassName("bubbly-button");
+
+        for (var i = 0; i < bubblyButtons.length; i++) {
+            bubblyButtons[i].addEventListener('click', animateButton, false);
+        }
+    </script>
+</body>
+</html>
